@@ -146,7 +146,7 @@ function ResponsiveAppBar() {
             </Typography>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="John Doe" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="John Doe" src="" />
               </IconButton>
             </Tooltip>
             <Menu
