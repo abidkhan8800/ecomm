@@ -4,12 +4,12 @@ import  Products  from './features/products/Products'
 import  Navbar  from './features/navbar/Navbar'
 import  Container from '@mui/material/Container';
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-     <BrowserRouter>
+     <HashRouter>
       <Navbar />
       <Container style={{marginTop: "5.5em"}}>
        <Routes>
@@ -17,7 +17,7 @@ function App() {
          <Route exact path="/counter" element={<Counter/>}></Route>
        </Routes>
        </Container>
-     </BrowserRouter>
+     </HashRouter>
      </div>
   );
 }
