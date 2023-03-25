@@ -1,6 +1,7 @@
 import React from 'react';
 import { Counter } from './features/counter/Counter';
 import  Products  from './features/products/Products'
+import ProductDetailCard from './features/products/ProductDetailCard'
 import  Navbar  from './features/navbar/Navbar'
 import  Container from '@mui/material/Container';
 import './App.css';
@@ -15,6 +16,7 @@ function App() {
        <Routes>
          <Route exact path="/" element={<Products/>}></Route>
          <Route exact path="/counter" element={<Counter/>}></Route>
+         <Route exact path="/product/:id" element={<ProductDetailCard />} ></Route>
        </Routes>
        </Container>
      </HashRouter>

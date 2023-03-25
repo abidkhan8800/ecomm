@@ -1,16 +1,18 @@
 import React, {useState} from 'react'
 import { Button, Grid, Typography, Rating, TextField } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useNavigate } from "react-router-dom";
 
 
 function ProductCard(props) {
+  let navigate = useNavigate(); 
   let {productDetails, removeProduct, updateProduct} = props
-  let [edit, setEdit] = useState(false);
-  let [name, setName] = useState(productDetails.name);
-  let [price, setPrice] = useState(productDetails.price);
-  let [rating, setRating] = useState(productDetails.rating)
-  let [description, setDescription] = useState(productDetails.description);
-  let [isAdmin ,setIsAdmin] = useState(true)
+  const [name, setName] = useState(productDetails.name);
+  const [edit, setEdit] = useState(false);
+  const [price, setPrice] = useState(productDetails.price);
+  const [rating, setRating] = useState(productDetails.rating)
+  const [description, setDescription] = useState(productDetails.description);
+  const [isAdmin ,setIsAdmin] = useState(true)
 
 
   const handleCancelButton = () => {
@@ -31,9 +33,13 @@ function ProductCard(props) {
     setEdit(prev => !prev)
   }
 
+  const handleClickOnProductCard = (id) => {
+    navigate(`/product/${id}`)
+  }
+
   return (
     <Grid item container style={{backgroundColor: 'white', padding: '1em', marginBottom: '1em', borderRadius: '20px'}} >
-      <Grid container item>
+      <Grid container item onClick={() => handleClickOnProductCard(productDetails.id)} style={{cursor: 'pointer'}}>
           <Grid item xs={6} sm={3} md={2} lg={2}>
             <img height={200} width={200} src={productDetails.imgurl} alt={productDetails.alt}/>
           </Grid>
