@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { Button, Grid, Typography, Rating, TextField } from '@mui/material'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
 function ProductCard(props) {
@@ -9,7 +10,7 @@ function ProductCard(props) {
   let [price, setPrice] = useState(productDetails.price);
   let [rating, setRating] = useState(productDetails.rating)
   let [description, setDescription] = useState(productDetails.description);
-  let [isAdmin ,setIsAdmin] = useState(false)
+  let [isAdmin ,setIsAdmin] = useState(true)
 
 
   const handleCancelButton = () => {
@@ -59,7 +60,7 @@ function ProductCard(props) {
             <TextField multiline fullWidth id="outlined-basic" label="Product Description" variant="outlined" style={{textAlign: 'justify', marginTop: '1em'}} value={description} onChange={(e) => setDescription(e.target.value)}/>}
           </Grid>
       </Grid>
-      <Grid container justifyContent={'flex-end'}>
+      {isAdmin ? <Grid container justifyContent={'flex-end'}>
         {
           !edit ? 
             <Button variant="outlined" onClick={() => setEdit((prev) => !prev)} style={{marginRight: "1.5em", marginTop: "1em"}}>Edit</Button> 
@@ -72,6 +73,11 @@ function ProductCard(props) {
             : 
             <Button variant="outlined" color='success' onClick={() => handleSaveButton({price, id: productDetails.id, rating, name, description})} style={{ marginTop: "1em"}}> Save</Button>}
       </Grid>
+      :
+      <Grid container justifyContent={'flex-end'}>
+        <Button variant="outlined" onClick={() => setEdit((prev) => !prev)} style={{marginRight: "1.5em", marginTop: "1em"}} startIcon={<ShoppingCartIcon />}>Add To CART</Button> 
+      </Grid>
+      }
      
      
     </Grid>
