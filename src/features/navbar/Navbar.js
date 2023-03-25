@@ -13,11 +13,13 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { useNavigate } from 'react-router-dom';
 
 const pages = ['Products', 'Add a Product'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -28,8 +30,15 @@ function ResponsiveAppBar() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (item) => {
+    console.log("adad",item)
     setAnchorElNav(null);
+    if(item === 'add a product'){
+      navigate('/addproduct')
+    }
+    if(item === 'products'){
+      navigate('/')
+    }
   };
 
   const handleCloseUserMenu = () => {
@@ -89,7 +98,7 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={() => handleCloseNavMenu(page.toLowerCase())}>
                   <Typography textAlign="center" display='flex'>{page} {page.toLowerCase() === "add a product" &&  <AddCircleIcon sx={{ marginLeft:"10px"}} />}</Typography>
                 </MenuItem>
               ))}
@@ -118,7 +127,7 @@ function ResponsiveAppBar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleCloseNavMenu(page.toLowerCase())}
                 sx={{ my: 2, color: 'white', display: 'flex' }}
                 endIcon={ page.toLowerCase() === "add a product" && <AddCircleIcon/>}
               >
