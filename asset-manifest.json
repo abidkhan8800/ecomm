@@ -1,15 +1,13 @@
 {
   "files": {
     "main.css": "/abidkhan8800.github.io/ecomm/static/css/main.00fa370f.css",
-    "main.js": "/abidkhan8800.github.io/ecomm/static/js/main.b6299b02.js",
-    "static/js/787.954ee95d.chunk.js": "/abidkhan8800.github.io/ecomm/static/js/787.954ee95d.chunk.js",
+    "main.js": "/abidkhan8800.github.io/ecomm/static/js/main.91732921.js",
     "index.html": "/abidkhan8800.github.io/ecomm/index.html",
     "main.00fa370f.css.map": "/abidkhan8800.github.io/ecomm/static/css/main.00fa370f.css.map",
-    "main.b6299b02.js.map": "/abidkhan8800.github.io/ecomm/static/js/main.b6299b02.js.map",
-    "787.954ee95d.chunk.js.map": "/abidkhan8800.github.io/ecomm/static/js/787.954ee95d.chunk.js.map"
+    "main.91732921.js.map": "/abidkhan8800.github.io/ecomm/static/js/main.91732921.js.map"
   },
   "entrypoints": [
     "static/css/main.00fa370f.css",
-    "static/js/main.b6299b02.js"
+    "static/js/main.91732921.js"
   ]
 }
