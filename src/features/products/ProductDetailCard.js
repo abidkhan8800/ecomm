@@ -5,6 +5,7 @@ import {useParams} from 'react-router-dom'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useNavigate } from 'react-router-dom';
+import { cartItems } from '../cart/Cart'
 
 function ProductDetailCard(props) {
     const navigate = useNavigate()
@@ -14,6 +15,21 @@ function ProductDetailCard(props) {
     const handleClickBack = () => {
         navigate('/#')
     }
+
+    const handleClickOnAddToCart = (product) => {
+        const existingIndex = cartItems.findIndex((item) => item.id === product.id);
+            if(~existingIndex){
+              cartItems[existingIndex].quantity += 1 
+            } else{
+              cartItems.push({
+                    id: product.id,
+                    price: product.price,
+                    quantity: 1,
+                    name: product.name
+                })
+            }
+      }
+    
     
     return (
         <Container maxWidth={'sm'}>
@@ -39,7 +55,7 @@ function ProductDetailCard(props) {
                         <Button variant="outlined" startIcon={<KeyboardBackspaceIcon/>} onClick={handleClickBack}> back</Button>
                    </Grid>
                    <Grid>
-                        <Button variant="outlined" color='success' startIcon={<ShoppingCartIcon />}>Add To CART</Button> 
+                        <Button variant="outlined" color='success' startIcon={<ShoppingCartIcon />} onClick={() => handleClickOnAddToCart(product)}>Add To CART</Button> 
                    </Grid>
             </Grid>
         </Paper>

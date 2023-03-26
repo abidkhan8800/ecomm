@@ -1,11 +1,11 @@
 import React from 'react';
-import { Counter } from './features/counter/Counter';
 import AddProduct from './features/products/AddProduct'
 import PageNotFound from './features/pages/PageNotFound';
-import  Products  from './features/products/Products'
+import Products  from './features/products/Products'
 import ProductDetailCard from './features/products/ProductDetailCard'
-import  Navbar  from './features/navbar/Navbar'
-import  Container from '@mui/material/Container';
+import Navbar  from './features/navbar/Navbar'
+import Container from '@mui/material/Container';
+import Cart from './features/cart/Cart'
 import './App.css';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 
@@ -19,6 +19,7 @@ function App() {
          <Route exact path="/" element={<Products/>}></Route>
          <Route exact path="/product/:id" element={<ProductDetailCard />} ></Route>
          <Route exact path="/addproduct" element={<AddProduct />}></Route>
+         <Route exact path="/cart" element={<Cart />}></Route>
          <Route  path="*" element={<PageNotFound />}></Route>
        </Routes>
        </Container>

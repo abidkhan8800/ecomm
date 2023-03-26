@@ -15,7 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useNavigate } from 'react-router-dom';
 
-const pages = ['Products', 'Add a Product'];
+const pages = ['Products', 'Add a Product', 'Cart'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -31,13 +31,15 @@ function ResponsiveAppBar() {
   };
 
   const handleCloseNavMenu = (item) => {
-    console.log("adad",item)
     setAnchorElNav(null);
     if(item === 'add a product'){
       navigate('/addproduct')
     }
     if(item === 'products'){
       navigate('/')
+    }
+    if(item === 'cart'){
+      navigate('/cart')
     }
   };
 

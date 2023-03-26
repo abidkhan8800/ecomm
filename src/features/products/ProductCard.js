@@ -28,7 +28,6 @@ function ProductCard(props) {
   }
 
   const handleSaveButton = (payload) => {
-    console.log(payload)
     updateProduct(payload)
     setEdit(prev => !prev)
   }
@@ -39,8 +38,8 @@ function ProductCard(props) {
 
   return (
     <Grid item container style={{backgroundColor: 'white', padding: '1em', marginBottom: '1em', borderRadius: '20px'}} >
-      <Grid container item onClick={() => handleClickOnProductCard(productDetails.id)} style={{cursor: 'pointer'}}>
-          <Grid item xs={6} sm={3} md={2} lg={2}>
+      <Grid container item>
+          <Grid item xs={6} sm={3} md={2} lg={2} onClick={() => handleClickOnProductCard(productDetails.id)} style={{cursor: 'pointer'}}>
             <img height={200} width={200} src={productDetails.imgurl} alt={productDetails.alt}/>
           </Grid>
           <Grid item container xs={4} sm={2} md={2} lg={2} direction='column' marginLeft={"2em"} style={{textAlign: 'left'}}>
