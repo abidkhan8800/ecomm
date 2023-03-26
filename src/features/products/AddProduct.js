@@ -81,9 +81,13 @@ function AddProduct() {
                             <Grid item xs={12}>
                                 <TextField fullWidth varinat='outlined' type="text" label='Product Name' name="name" value={formData.name} onChange={handleChange}/>
                             </Grid>
-                            <Grid item container xs={12} justifyContent={'space-between'}>
-                                <TextField varinat='outlined' type="number" label='Price' name="price" value={formData.price} onChange={handleChange}/>
-                                <TextField varinat='outlined' type="number" label='Rating' step=".01" name="rating" value={formData.rating} onChange={handleChange}/>
+                            <Grid item container xs={12} spacing={1} justifyContent={'space-between'}>
+                                <Grid item>
+                                    <TextField varinat='outlined' type="number" label='Price' name="price" value={formData.price} onChange={handleChange}/>
+                                </Grid>
+                                <Grid item>
+                                    <TextField varinat='outlined' type="number" label='Rating' step=".01" name="rating" value={formData.rating} onChange={handleChange}/>
+                                </Grid>
                         </Grid>
                             <Grid item xs={12}>
                                 <TextField fullWidth varinat='outlined' label='Enter Image url' name="imgurl" value={formData.imgurl} onChange={handleChange}/>
