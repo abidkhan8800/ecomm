@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Paper, Grid, Button, Container, TextField} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import { items } from './Products'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useNavigate } from 'react-router-dom';
 let defaultFormData = {
@@ -27,14 +28,14 @@ function AddProduct() {
             } 
             if(value < 0){
                 value = 0
+            }else{
+                value = Number(value)
             }
            
         }
         if(name === "price"){
             if(value < 0){
                 value = 0
-            }else{
-                value = value
             }
            
         }
@@ -44,6 +45,31 @@ function AddProduct() {
                 [name]: value
             }
         })
+    }
+
+    const handleAddProduct = () => {
+        if(!formData.name){
+            window.alert('Product name cannot be blank');
+            return;
+        }else if(!formData.price){
+            window.alert('Product price cannot be 0');
+            return;
+        }else if(!formData.rating){
+            window.alert('Product rating cannot be 0');
+            return;
+        }else if(!formData.imgurl){
+            window.alert('Product imgurl cannot be blank');
+            return;
+        }else if(!formData.description){
+            window.alert('Product descriiption cannot be blank');
+            return;
+        }
+
+        items.push({...formData, id: items.length + 1})
+
+        console.log(items)
+        setFormData(defaultFormData)
+        navigate('/#')
     }
     
     return (
@@ -57,7 +83,7 @@ function AddProduct() {
                             </Grid>
                             <Grid item container xs={12} justifyContent={'space-between'}>
                                 <TextField varinat='outlined' type="number" label='Price' name="price" value={formData.price} onChange={handleChange}/>
-                                <TextField varinat='outlined' type="number" label='Rating' name="rating" value={formData.rating} onChange={handleChange}/>
+                                <TextField varinat='outlined' type="number" label='Rating' step=".01" name="rating" value={formData.rating} onChange={handleChange}/>
                         </Grid>
                             <Grid item xs={12}>
                                 <TextField fullWidth varinat='outlined' label='Enter Image url' name="imgurl" value={formData.imgurl} onChange={handleChange}/>
@@ -72,7 +98,7 @@ function AddProduct() {
                             <Button variant="outlined" startIcon={<KeyboardBackspaceIcon/>} onClick={handleClickBack}> back</Button>
                     </Grid>
                     <Grid>
-                            <Button variant="outlined" color='success' startIcon={<AddIcon />}>Add Product</Button> 
+                            <Button variant="outlined" color='success' startIcon={<AddIcon />} onClick={handleAddProduct}>Add Product</Button> 
                     </Grid>
                 </Grid>
             </Paper>
