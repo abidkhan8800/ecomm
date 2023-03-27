@@ -16,7 +16,7 @@ function CartItem(props) {
     }
 
     return (
-        <Paper elevation={1} style={{ backgroundColor: 'lavenderblush', borderRadius: '20px', marginBottom: '0.5em' }}>
+        <Paper elevation={1} style={{ backgroundColor: '#eee', borderRadius: '20px', marginBottom: '0.5em' }}>
             <Grid container item padding={'1em'} xs={12} alignItems={'center'} spacing={0.5} style={{fontWeight: 500, marginTop: '0.5em' }}>
                 <Grid item container xs={12} sm={8} md={8} lg={8}>
                     <Grid item xs={3} style={{ textAlign: 'left' }}>

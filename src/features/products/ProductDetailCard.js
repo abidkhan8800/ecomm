@@ -7,6 +7,7 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from '../cart/cartSlice';
+import PageNotFound from '../pages/PageNotFound'
 
 
 function ProductDetailCard(props) {
@@ -24,6 +25,11 @@ function ProductDetailCard(props) {
         dispatch(addItem(product))
       }
     
+    if(!product){
+        return (
+            <PageNotFound />
+        )
+    }
     
     return (
         <Container maxWidth={'sm'}>
