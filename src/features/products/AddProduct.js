@@ -25,15 +25,12 @@ function AddProduct(props) {
     }
     const handleChange = (e) => {
         let {name, value} = e.target;
-
         if(name === "rating"){
             if(value >= 5){
                 value = 5
             } 
             if(value < 0){
                 value = 0
-            }else{
-                value = Number(value)
             }
            
         }

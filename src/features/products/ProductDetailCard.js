@@ -1,19 +1,17 @@
 import React from 'react';
 import {Paper, Grid, Rating, Typography, Button, Container} from '@mui/material';
-import {items} from './Products'
+
 import {useParams} from 'react-router-dom'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useNavigate } from 'react-router-dom';
-import { cartItems } from '../cart/Cart';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-    updateProduct,
-    removeProduct
-} from './productSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem } from '../cart/cartSlice';
+
 
 function ProductDetailCard(props) {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const products = useSelector(state => state.product.productList)
     const {id} = useParams();
     let product = products.find(item => item.id === Number(id))
@@ -23,17 +21,7 @@ function ProductDetailCard(props) {
     }
 
     const handleClickOnAddToCart = (product) => {
-        const existingIndex = cartItems.findIndex((item) => item.id === product.id);
-            if(~existingIndex){
-              cartItems[existingIndex].quantity += 1 
-            } else{
-              cartItems.push({
-                    id: product.id,
-                    price: product.price,
-                    quantity: 1,
-                    name: product.name
-                })
-            }
+        dispatch(addItem(product))
       }
     
     

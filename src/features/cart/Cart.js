@@ -1,48 +1,25 @@
 import React, { useState } from 'react'
-import { Paper, Grid, Button, Container, TextField } from '@mui/material'
+import { Paper, Grid, Button, Container } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import { useNavigate } from 'react-router-dom';
 import CartItem from './CartItem';
+import { useSelector, useDispatch } from 'react-redux';
+import { emptyCart } from './cartSlice';
 
  export let cartItems = []
 
 
 function Cart(props) {
-    const navigate = useNavigate()
-    const [cartList, setCartList] = useState(cartItems)
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const cartList = useSelector(state => state.cart.cartItemsList);
     const handleClickBack = () => {
         navigate('/#')
     }
 
-    const handleAddToCart = (product) => {
-        const existingIndex = cartList.findIndex((item) => item.id === product.id);
-        if(~existingIndex){
-            cartList[existingIndex].quantity += 1 
-        } else{
-            cartList.push({
-                id: product.id,
-                price: product.price,
-                quantity: 1,
-                name: product.name
-            })
-        }
-
-        setCartList([...cartList])
-    }
-    const handleRemoveFromCart = (id) => {
-        let updatedCartList = []
-        const existingIndex = cartList.findIndex((item) => item.id === id);
-        if(~existingIndex && cartList[existingIndex].quantity >= 2){
-            cartList[existingIndex].quantity -= 1 
-            updatedCartList = [...cartList]
-        } else{
-            updatedCartList = cartList.filter((item) => item.id !== id)
-        }
-        setCartList([...updatedCartList])
-    }
     const handleEmptyCart = () => {
-        setCartList([])
+        dispatch(emptyCart())
     }
     return (
         <Container maxWidth={'md'}>
@@ -60,7 +37,7 @@ function Cart(props) {
                 </Grid>
                 <Grid>
                     {cartList.map((cartItem) => (
-                        <CartItem cartItem={cartItem} key={cartItem.id} handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveFromCart}/>
+                        <CartItem cartItem={cartItem} key={cartItem.id} />
                     ))}
                 </Grid>
                 <Grid container justifyContent={'space-between'} marginTop={'1em'}>
