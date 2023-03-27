@@ -84,7 +84,6 @@ export const productSlice = createSlice({
         state.productList = state.productList.filter(product => product.id !== action.payload)
     },
     updateProduct: (state, action)=>{
-        console.log("action",action)
         const index = state.productList.findIndex(product => product.id === action.payload.id)
         console.log(index)
         for(let key in action.payload){
