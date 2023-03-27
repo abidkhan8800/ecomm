@@ -5,12 +5,18 @@ import {useParams} from 'react-router-dom'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useNavigate } from 'react-router-dom';
-import { cartItems } from '../cart/Cart'
+import { cartItems } from '../cart/Cart';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    updateProduct,
+    removeProduct
+} from './productSlice';
 
 function ProductDetailCard(props) {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const products = useSelector(state => state.product.productList)
     const {id} = useParams();
-    let product = items.find(item => item.id === Number(id))
+    let product = products.find(item => item.id === Number(id))
 
     const handleClickBack = () => {
         navigate('/#')

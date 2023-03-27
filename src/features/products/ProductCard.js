@@ -2,11 +2,14 @@ import React, {useState} from 'react'
 import { Button, Grid, Typography, Rating, TextField } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from "react-router-dom";
+import { useSelector , useDispatch } from 'react-redux';
+import { removeProduct, updateProduct } from './productSlice'
 
 
 function ProductCard(props) {
   let navigate = useNavigate(); 
-  let {productDetails, removeProduct, updateProduct} = props
+  let dispatch = useDispatch()
+  let {productDetails} = props
   const [name, setName] = useState(productDetails.name);
   const [edit, setEdit] = useState(false);
   const [price, setPrice] = useState(productDetails.price);
@@ -24,11 +27,12 @@ function ProductCard(props) {
   }
 
   const handleDeleteButton = (id) => {
-    removeProduct(id)
+    console.log(id)
+    dispatch(removeProduct(id))
   }
 
   const handleSaveButton = (payload) => {
-    updateProduct(payload)
+    dispatch(updateProduct(payload))
     setEdit(prev => !prev)
   }
 

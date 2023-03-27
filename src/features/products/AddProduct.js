@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import {Paper, Grid, Button, Container, TextField} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { items } from './Products'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useNavigate } from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import { addProduct } from './productSlice';
+
 let defaultFormData = {
     name: "",
     imgurl: "",
@@ -11,7 +13,9 @@ let defaultFormData = {
     rating: 0,
     description: ""
 }
-function AddProduct() {
+function AddProduct(props) {
+    const dispatch = useDispatch();
+    const products = useSelector(state => state.product.productList)
     const [formData, setFormData] = useState(defaultFormData)
     const navigate = useNavigate()
 
@@ -65,9 +69,8 @@ function AddProduct() {
             return;
         }
 
-        items.push({...formData, id: items.length + 1})
+        dispatch(addProduct({...formData, id: products.length + 1}))
 
-        console.log(items)
         setFormData(defaultFormData)
         navigate('/#')
     }
