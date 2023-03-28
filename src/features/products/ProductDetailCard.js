@@ -4,27 +4,27 @@ import {Paper, Grid, Rating, Typography, Button, Container} from '@mui/material'
 import {useParams} from 'react-router-dom'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from '../cart/cartSlice';
 import PageNotFound from '../pages/PageNotFound'
 
 
 function ProductDetailCard(props) {
+    const state = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const products = useSelector(state => state.product.productList)
     const {id} = useParams();
     const [product ,setProduct] = useState({}); 
     useEffect(() => {
-        setProduct(products.find(item => item.id === Number(id)))
+        setProduct(products.find(item => item.id === Number(id)) || state.state)
 
-    },[])
+    },[id, dispatch, products])
     const handleClickBack = () => {
         navigate('/#')
     }
 
-    console.log(product)
 
     const handleClickOnAddToCart = (product) => {
         dispatch(addItem(product))

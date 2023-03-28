@@ -37,7 +37,7 @@ function ProductCard(props) {
   }
 
   const handleClickOnProductCard = (id) => {
-    navigate(`/product/${id}`)
+    navigate(`/product/${id}`,{state: productDetails})
   }
 
   return (
