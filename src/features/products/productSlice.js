@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchProducts, updateProducts } from './productApi';
+import { toast } from 'react-toastify';
 
 export const fetchProductsAsync = createAsyncThunk(
   'products/fetchProducts',
@@ -78,40 +79,40 @@ export const productSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchProductsAsync.pending, (state, action) => {
-        state.status = 'loading';
+        console.log("pending")
       })
       .addCase(fetchProductsAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.productList = action.payload ? action.payload.sort((a,b) => a.id - b.id) : [];
+        toast('Data fetched successfully',{type: 'success'})
       }).addCase(fetchProductsAsync.rejected, (state, action) => {
-        console.log("inside rejected", action)
+        toast('Error in fetching data. Please try again after sometime!',{type: 'error'})
       })
       .addCase(updateProductsAsync.pending, (state, action) => {
         state.status = 'loading';
       })
       .addCase(updateProductsAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        console.log(action)
         state.productList = action.payload ? action.payload.sort((a,b) => a.id - b.id) : [];
+        toast('Product updated successfully.',{type: 'success'})
       }).addCase(updateProductsAsync.rejected, (state, action) => {
-        console.log(action, state)
+        toast('Error in updating product!',{type: 'error'})
       }).addCase(deleteProductAsync.pending, (state, action) => {
         console.log(action, state)
       })
       .addCase(deleteProductAsync.fulfilled, (state, action) => {
-        console.log(action)
         state.productList = action.payload;
+        toast('Product removed successfully.',{type: 'success'})
       }).addCase(deleteProductAsync.rejected, (state, action) => {
-        console.log("inside rejected", action)
+        toast('Error in removing product!',{type: 'error'})
       }).addCase(addProductAsync.pending, (state, action) => {
         console.log(action, state)
       })
       .addCase(addProductAsync.fulfilled, (state, action) => {
-        console.log(action)
-        console.log(action.payload)
         state.productList = action.payload;
+        toast('New product added successfully.',{type: 'success'})
       }).addCase(addProductAsync.rejected, (state, action) => {
-        console.log("inside rejected", action)
+        toast('Error in adding product!',{type: 'success'})
       });
   },
 });

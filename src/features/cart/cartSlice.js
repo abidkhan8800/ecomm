@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchCart, updateCart } from './cartApi';
+import { toast } from 'react-toastify';
 
 const initialState = {
     cartItemsList: []
@@ -103,43 +104,39 @@ export const cartSlice = createSlice({
             console.log("fetch cart action started")
          })
          .addCase(fetchCartAsync.fulfilled, (state, action)=>{
-            console.log("fetch cart action fullfilled")
             state.cartItemsList = action.payload || [];
          })
          .addCase(fetchCartAsync.rejected, (state, action)=>{
-            console.log("fetch cart action rejected")
+            toast('Error is fetching data!', {type:"error"})
          })
          .addCase(addToCartAsync.pending, (state, action)=>{
-            console.log("emptyCartAsync cart action started")
             console.log(action,state)
          })
          .addCase(addToCartAsync.fulfilled, (state, action)=>{
-            console.log("addToCartAsync cart action fullfilled")
             state.cartItemsList = action.payload || [];
-            console.log(action,state)
+            toast('Item added to cart successfully.', {type:"success"})
          })
          .addCase(addToCartAsync.rejected, (state, action)=>{
-            console.log("addToCartAsync cart action rejected")
-            console.log(action,state)
+            toast('Error in adding item to cart!', {type:"error"})
          }).addCase(emptyCartAsync.pending, (state, action)=>{
             console.log("emptyCartAsync cart action started")
          })
          .addCase(emptyCartAsync.fulfilled, (state, action)=>{
-            console.log("emptyCartAsync cart action fullfilled")
             state.cartItemsList = action.payload || [];
+            toast('Cart emptied successfully.', {type:"success"})
          })
          .addCase(emptyCartAsync.rejected, (state, action)=>{
-            console.log("emptyCartAsync cart action rejected")
+            toast('Error in removing cart data!', {type:"error"})
          })
          .addCase(removeFromCartAsync.pending, (state, action)=>{
             console.log("emptyCartAsync cart action started")
          })
          .addCase(removeFromCartAsync.fulfilled, (state, action)=>{
-            console.log("emptyCartAsync cart action fullfilled")
             state.cartItemsList = action.payload || [];
+            toast('Item removed from cart successfully.', {type:"success"})
          })
          .addCase(removeFromCartAsync.rejected, (state, action)=>{
-            console.log("emptyCartAsync cart action rejected")
+            toast('Error in removing item from cart!', {type:"error"})
          });
     }
 })

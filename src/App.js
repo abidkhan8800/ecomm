@@ -8,10 +8,13 @@ import Container from '@mui/material/Container';
 import Cart from './features/cart/Cart'
 import './App.css';
 import { HashRouter, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <div className="App">
+     <ToastContainer position="top-center" autoClose={2000} theme="dark"/>
      <HashRouter>
       <Navbar />
       <Container style={{marginTop: "5.5em"}}>
@@ -20,7 +23,7 @@ function App() {
          <Route exact path="/product/:id" element={<ProductDetailCard />} ></Route>
          <Route exact path="/addproduct" element={<AddProduct />}></Route>
          <Route exact path="/cart" element={<Cart />}></Route>
-         <Route  path="*" element={<PageNotFound />}></Route>
+         <Route path="*" element={<PageNotFound />}></Route>
        </Routes>
        </Container>
      </HashRouter>

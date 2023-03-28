@@ -1,13 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Paper, Grid, Button, Container } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import { useNavigate } from 'react-router-dom';
 import CartItem from './CartItem';
 import { useSelector, useDispatch } from 'react-redux';
-import { emptyCartAsync } from './cartSlice';
-
-
+import { emptyCartAsync, fetchCartAsync } from './cartSlice';
+let isFirstReload = true;
 
 function Cart(props) {
     const navigate = useNavigate();
@@ -17,6 +16,10 @@ function Cart(props) {
         navigate('/#')
     }
 
+    useEffect(()=>{
+        if(isFirstReload) dispatch(fetchCartAsync());
+        isFirstReload = false
+    },[dispatch])
     const handleEmptyCart = () => {
         dispatch(emptyCartAsync())
     }
