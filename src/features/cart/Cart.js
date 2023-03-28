@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Paper, Grid, Button, Container } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import { useNavigate } from 'react-router-dom';
 import CartItem from './CartItem';
 import { useSelector, useDispatch } from 'react-redux';
-import { emptyCart } from './cartSlice';
+import { emptyCartAsync } from './cartSlice';
 
- export let cartItems = []
 
 
 function Cart(props) {
@@ -19,7 +18,7 @@ function Cart(props) {
     }
 
     const handleEmptyCart = () => {
-        dispatch(emptyCart())
+        dispatch(emptyCartAsync())
     }
     return (
         <Container maxWidth={'md'}>

@@ -1,18 +1,18 @@
 import React from 'react'
 import { Paper, Grid, Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { addItem, removeItem } from './cartSlice';
+import { addToCartAsync, removeFromCartAsync } from './cartSlice';
 
 function CartItem(props) {
     const { cartItem } = props;
     const dispatch = useDispatch();
 
     const handleIncrement = (product) => {
-        dispatch(addItem(product))
+        dispatch(addToCartAsync(product))
     }
 
     const handleDecrement = (id) => {
-        dispatch(removeItem(id))
+        dispatch(removeFromCartAsync(id))
     }
 
     return (

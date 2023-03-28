@@ -4,6 +4,7 @@ import ProductCard from './ProductCard'
 import { useSelector, useDispatch } from 'react-redux';
 import {sortProductList} from './productSlice';
 import { fetchProductsAsync } from './productSlice'
+import { fetchCartAsync } from '../cart/cartSlice';
 
 let isFirstReload = true;
 
@@ -13,7 +14,10 @@ function Products(props) {
   const [isAscending , setIsAscending] = useState(true);
 
   useEffect(()=>{
-    if(isFirstReload) dispatch(fetchProductsAsync());
+    if(isFirstReload) {
+      dispatch(fetchProductsAsync());
+      dispatch(fetchCartAsync())
+    }
     isFirstReload =  false
   },[dispatch])
 

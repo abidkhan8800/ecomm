@@ -6,7 +6,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem } from '../cart/cartSlice';
+import { addToCartAsync } from '../cart/cartSlice';
 import PageNotFound from '../pages/PageNotFound'
 
 
@@ -20,14 +20,14 @@ function ProductDetailCard(props) {
     useEffect(() => {
         setProduct(products.find(item => item.id === Number(id)) || state.state)
 
-    },[id, dispatch, products])
+    },[id, dispatch, products, state.state])
     const handleClickBack = () => {
         navigate('/#')
     }
 
 
     const handleClickOnAddToCart = (product) => {
-        dispatch(addItem(product))
+        dispatch(addToCartAsync(product))
       }
     
     if(!product){

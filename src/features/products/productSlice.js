@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchProducts, updateProducts } from './productApi';
-import { useSelector } from 'react-redux';
 
 export const fetchProductsAsync = createAsyncThunk(
   'products/fetchProducts',
@@ -27,7 +26,6 @@ export const addProductAsync = createAsyncThunk(
   'products/addProducts',
   async (product, {getState}) => {
     let state = getState();
-    let list = state.product.productList;
     const response = await updateProducts([...state.product.productList, {...product, alt: product.name + "img"}]);
     return response;
   }
@@ -47,7 +45,7 @@ export const deleteProductAsync = createAsyncThunk(
 
 const initialState = {
   productList: [],
-  isAdmin: false
+  isAdmin: true
 
 };
 
