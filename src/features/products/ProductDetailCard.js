@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Paper, Grid, Rating, Typography, Button, Container} from '@mui/material';
 
 import {useParams} from 'react-router-dom'
@@ -15,11 +15,16 @@ function ProductDetailCard(props) {
     const dispatch = useDispatch();
     const products = useSelector(state => state.product.productList)
     const {id} = useParams();
-    let product = products.find(item => item.id === Number(id))
+    const [product ,setProduct] = useState({}); 
+    useEffect(() => {
+        setProduct(products.find(item => item.id === Number(id)))
 
+    },[])
     const handleClickBack = () => {
         navigate('/#')
     }
+
+    console.log(product)
 
     const handleClickOnAddToCart = (product) => {
         dispatch(addItem(product))
@@ -43,7 +48,7 @@ function ProductDetailCard(props) {
                     <Grid>
                         <Typography style={{fontSize: 18, margin: '0'}}>{product.name}</Typography> 
                         <Typography style={{fontSize: "80%", margin: 0}}>Rs: {product.price}</Typography> 
-                        <Rating value={product.rating} readOnly precision={0.1}/>
+                        <Rating value={Number(product.rating)} readOnly precision={0.1}/>
                     </Grid>
                     <Grid>
                         <Typography style={{textAlign: 'justify'}}>{product.description}</Typography>

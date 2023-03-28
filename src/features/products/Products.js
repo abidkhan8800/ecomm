@@ -1,15 +1,21 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Grid, Button } from '@mui/material'
 import ProductCard from './ProductCard'
 import { useSelector, useDispatch } from 'react-redux';
-import {sortProductList} from './productSlice'
+import {sortProductList} from './productSlice';
+import { fetchProductsAsync } from './productSlice'
 
+let isFirstReload = true;
 
 function Products(props) {
   const dispatch = useDispatch()
-  const products = useSelector(state => state.product.productList);
+  const products = useSelector(state => state.product.productList) || [];
+  const [isAscending , setIsAscending] = useState(true);
 
-  let [isAscending , setIsAscending] = useState(true)
+  useEffect(()=>{
+    if(isFirstReload) dispatch(fetchProductsAsync());
+    isFirstReload =  false
+  },[dispatch])
 
   const handleClickOnSort = () => {
     dispatch(sortProductList(isAscending))

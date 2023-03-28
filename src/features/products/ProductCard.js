@@ -3,7 +3,7 @@ import { Button, Grid, Typography, Rating, TextField } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { removeProduct, updateProduct } from './productSlice'
+import { updateProductsAsync, deleteProductAsync } from './productSlice'
 
 
 function ProductCard(props) {
@@ -28,11 +28,11 @@ function ProductCard(props) {
 
   const handleDeleteButton = (id) => {
     console.log(id)
-    dispatch(removeProduct(id))
+    dispatch(deleteProductAsync(id))
   }
 
   const handleSaveButton = (payload) => {
-    dispatch(updateProduct(payload))
+    dispatch(updateProductsAsync(payload))
     setEdit(prev => !prev)
   }
 

@@ -4,7 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import { addProduct } from './productSlice';
+import { addProductAsync } from './productSlice';
 
 let defaultFormData = {
     name: "",
@@ -29,10 +29,6 @@ function AddProduct(props) {
             if(value >= 5){
                 value = 5
             } 
-            if(value < 0){
-                value = 0
-            }
-           
         }
         if(name === "price"){
             if(value < 0){
@@ -66,7 +62,7 @@ function AddProduct(props) {
             return;
         }
 
-        dispatch(addProduct({...formData, id: products.length + 1}))
+        dispatch(addProductAsync({...formData, id: products.length + 1}))
 
         setFormData(defaultFormData)
         navigate('/#')

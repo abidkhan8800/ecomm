@@ -14,12 +14,15 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useNavigate } from 'react-router-dom';
+import Badge from '@mui/material/Badge';
+import {useSelector} from 'react-redux';
 
 const pages = ['Products', 'Add a Product', 'Cart'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
+  const cartItemsList = useSelector(state => state.cart.cartItemsList)
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -101,7 +104,7 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={() => handleCloseNavMenu(page.toLowerCase())}>
-                  <Typography textAlign="center" display='flex'>{page} {page.toLowerCase() === "add a product" &&  <AddCircleIcon sx={{ marginLeft:"10px"}} />}</Typography>
+                  <Typography textAlign="center" display='flex'>{ page.toLowerCase() === 'cart' && cartItemsList.length > 0?  <Badge badgeContent={cartItemsList.length} color="error">{page}&nbsp;&nbsp;</Badge> :  page } {page.toLowerCase() === "add a product" &&  <AddCircleIcon sx={{ marginLeft:"10px"}} />}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -127,14 +130,17 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
+             
               <Button
                 key={page}
                 onClick={() => handleCloseNavMenu(page.toLowerCase())}
                 sx={{ my: 2, color: 'white', display: 'flex' }}
                 endIcon={ page.toLowerCase() === "add a product" && <AddCircleIcon/>}
               >
-                {page}
+                { page.toLowerCase() === 'cart' && cartItemsList.length > 0?  <Badge badgeContent={cartItemsList.length} color="warning">{page}</Badge> :  page }
+               
               </Button>
+             
             ))}
           </Box>
 
