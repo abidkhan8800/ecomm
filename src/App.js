@@ -6,6 +6,7 @@ import ProductDetailCard from './features/products/ProductDetailCard'
 import Navbar  from './features/navbar/Navbar'
 import Container from '@mui/material/Container';
 import Cart from './features/cart/Cart'
+import Login from './features/pages/Login';
 import './App.css';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -20,6 +21,7 @@ function App() {
       <Container style={{marginTop: "5.5em"}}>
        <Routes>
          <Route exact path="/" element={<Products/>}></Route>
+         <Route exact path="/login" element={<Login/>}></Route>
          <Route exact path="/product/:id" element={<ProductDetailCard />} ></Route>
          <Route exact path="/addproduct" element={<AddProduct />}></Route>
          <Route exact path="/cart" element={<Cart />}></Route>
